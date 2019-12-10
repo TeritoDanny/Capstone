@@ -24,7 +24,8 @@ collection = db['stocks']
 ```
 This enhancement occured in two primary steps, excluding the backend changes to the database itself, which are not highlighted in this portfolio. First, we need to capture a username and password from the user. Secondly, we need to pass this info during the database connection setup. These two steps are shown in the code snippets below:
 
-```def main():
+```
+def main():
   
     useName = input("Username:")
     passW = input("Password:")
@@ -42,6 +43,20 @@ def authenticate_user(name,pw):
         return False
     return True
 ```
+This is the quick version highlighting the most important pieces of code, to see the final code in its full version please reference the file CS499FinalCRUDDannyRandolphEnhancementOne.py in the github directory for this project.
+
+### Enhancement One Narrative
+
+To begin, I started with my full-stack API that was created in client/server development class CS340. It was created a few months ago and is fully functional but devoid of any sort of security protections whatsoever, and the database is completely open to be accessed by anyone. It is an exemplary example of my skills at full-stack development and is, in fact, the project I am most proud of and I feel demonstrates real-world industry skills the best. This enhancement to add security to the software accomplishes two main goals. First, it meets the course objects planned with this enhancement and keeps me on track for full outcome coverage. Secondly, it really makes this artifact shine as it is included in my ePortfolio as a fully functional API that could very reasonably be used in a real-world scenario. 
+
+This first enhancement was quite a fun and challenging learning exercise. The enhancement completed was to add a username and login to the database connection so that our data could be secure and not just have an open database that anyone could access. This required a good amount of learning and research into how to use the right functions from PyMongo framework in order to pass username and password to the database connection. Additionally, the program had to be modified to include this information as previously the database connection was setup immediately after the import statements. Now, it has to get the user to provide a username and password first, and then setup the database connection which is now being done inside the main method. The main method then sends the information to a newly created function authenticate_user in order to create the DB connection and successfully verify login credentials. Additionally, I chose to send this to a new function rather than just build it inside the main method, so that the code can be wrapped in a try block and return a False value if there is an error and additionally it can be called again with new credentials in the future, whereas if it was hardcoded in the main function this would not be possible.
+
+While not demonstrated directly in the provided code, this project also involved a lot of learning on the backend mongo setup in order to change it to a secured database. Additionally, this involved learning how to create and maintain a table of usernames and passwords that the database would accept. Lastly, I also learned to change the default address and port in accordance with best practices from the industry on establishing a secure database.
+
+In conclusion, a good deal of changes was made on both the front end as well as the back end of this full-stack project in order to add an invaluable layer of security to our database. This enhancement accomplished both of the course objectives I planned for enhancement one. First, it demonstrates my ability to design and implement solutions to solve a problem, like database security, within acceptable constraints as far as trade offs and design choices. Secondly, it demonstrates a security mindset and anticipates adversarial exploits and aims to help reduce the risk. However, there are a few immediate changes that would be next steps if this were a real environment and I wanted to touch on those here. First, retrieving username and password from the user is setup in the only python file with a main method, however, there are other files in this full-stack project and I would create a way for all of those files to use the provided name and password rather than have to ask the user every time we move to a different portion. Secondly, while username and password help make the database much more secure than it was, the next step would be to add SSL and security certificates to the process to add an additional layer of security. With the combination of user authentication and SSL/security certificates I believe we would have successfully created a full-stack API that is sufficiently secure by the current standards of best practices in this industry.
+
+## Enhancement Two - Data Structures and Algorithms
+
 
 ### Markdown
 
