@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+# Welcome to my ePortfolio
 
-You can use the [editor on GitHub](https://github.com/TeritoDanny/Capstone/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+Here is a list of works showing my most exemplary software engineering examples during my academic career in Computer Science
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Additionally, I have completed a series of enhancements above and beyond what was required for the original course, in order to showcase my abilities further in several key areas.
 
 ### Markdown
 
