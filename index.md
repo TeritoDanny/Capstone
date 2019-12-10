@@ -53,10 +53,65 @@ This first enhancement was quite a fun and challenging learning exercise. The en
 
 While not demonstrated directly in the provided code, this project also involved a lot of learning on the backend mongo setup in order to change it to a secured database. Additionally, this involved learning how to create and maintain a table of usernames and passwords that the database would accept. Lastly, I also learned to change the default address and port in accordance with best practices from the industry on establishing a secure database.
 
-In conclusion, a good deal of changes was made on both the front end as well as the back end of this full-stack project in order to add an invaluable layer of security to our database. This enhancement accomplished both of the course objectives I planned for enhancement one. First, it demonstrates my ability to design and implement solutions to solve a problem, like database security, within acceptable constraints as far as trade offs and design choices. Secondly, it demonstrates a security mindset and anticipates adversarial exploits and aims to help reduce the risk. However, there are a few immediate changes that would be next steps if this were a real environment and I wanted to touch on those here. First, retrieving username and password from the user is setup in the only python file with a main method, however, there are other files in this full-stack project and I would create a way for all of those files to use the provided name and password rather than have to ask the user every time we move to a different portion. Secondly, while username and password help make the database much more secure than it was, the next step would be to add SSL and security certificates to the process to add an additional layer of security. With the combination of user authentication and SSL/security certificates I believe we would have successfully created a full-stack API that is sufficiently secure by the current standards of best practices in this industry.
+In conclusion, a good deal of changes was made on both the front end as well as the back end of this full-stack project in order to add an invaluable layer of security to our database. This enhancement accomplished both of the course objectives I planned for enhancement one. First, it demonstrates my ability to design and implement solutions to solve a problem, like database security, within acceptable constraints as far as trade offs and design choices. Secondly, it demonstrates a security mindset and anticipates adversarial exploits and aims to help reduce the risk. This ensures the portfolio is on track with the original outline in order to ensure I achieve all course outcomes. However, there are a few immediate changes that would be next steps if this were a real environment and I wanted to touch on those here. First, retrieving username and password from the user is setup in the only python file with a main method, however, there are other files in this full-stack project and I would create a way for all of those files to use the provided name and password rather than have to ask the user every time we move to a different portion. Secondly, while username and password help make the database much more secure than it was, the next step would be to add SSL and security certificates to the process to add an additional layer of security. With the combination of user authentication and SSL/security certificates I believe we would have successfully created a full-stack API that is sufficiently secure by the current standards of best practices in this industry.
 
 ## Enhancement Two - Data Structures and Algorithms
 
+This second enhancement's primary goal was to take a group of functions that were created for academic purposes and generaly only required to return a specific field, and make them more professional by developing a set of uniform fields to include in every result, making them look and feel more professional as well as bring uniformity to the user experience and ensure a pleasant interaction with the application. For this purpose I identified 4 key fields to include in every function Ticker, Price, Sector, and Industry. These were changed to match all of the fields, but I highlight one primary example below:
+
+Old function
+```
+# stockReport/list
+@route('/stockReport/<list>', method='GET')
+def stockReport(list):
+    projection = {"Ticker" : 1, "50-Day Simple Moving Average": 1, "_id": 0}
+    myDoc = {"Ticker": list}
+    result = read_documentProjection(myDoc, projection)
+    return json.loads(json.dumps(result, indent=4, default=json_util.default))
+```
+
+New Function
+```
+# stockReport/list
+@route('/stockReport/<list>', method='GET')
+def stockReport(list):
+    projection = {"Ticker" : 1, "Sector" : 1, "Industry" : 1, "Performance (YTD)" : 1, "Price" : 1, "50-Day Simple Moving Average": 1, "Shares Float": 1, "_id": 0}
+    myDoc = {"Ticker": list}
+    result = read_documentProjection(myDoc, projection)
+    return json.loads(json.dumps(result, indent=4, default=json_util.default))
+```
+
+### Enhancement Two Narrative
+
+To begin, I started with my full-stack API from CS340 class, client and server development. It was created a few months ago and is fully functional but I felt strongly there was an opportunity to expand the stock report function to return something much more interesting, as well as demonstrate a real-world output, by enhancing the query and the projection it returns. I was proud of this project at the time, and still am, but I see a unique opportunity in really showcases how closely this can reflect real-world scenarios by developing the queries an algorithms a little more here.
+
+	This second enhancement is to alter a few things with the algorithms and primarily the data structure that is returned to the user as well. First, all of this is using a stock market database and I want the information to be the same no matter what query we are running. For that I have selected the Ticker, the Sector, the Industry, Performance, and Price. I am going to make sure that all of my stock-analysis queries report these 5 pieces of information and in the same order consistently. If there is anything specific to a particular category, it will be included in addition to these categories. The only exception will be the one search that returns anything greater than a certain 50-day average as that one returns too many results and causing it to return 6 times as many fields just made it harder to read and didn’t feel as an improvement. On a logical level, this appeared to be more complex than it really needs to be. After getting into the code, Python, or PyMongo more accurately, provides a strong tool for this already in the form of a Projection variable. The projection variable can be used to specify what data is returned and how you want to see it. Once I have build this projection variable once, it can be used repeatedly to provide this extensive, uniform feedback we are looking for. I have provided a key before and after example below:
+ 
+```
+# stockReport/list
+@route('/stockReport/<list>', method='GET')
+def stockReport(list):
+    projection = {"Ticker" : 1, "50-Day Simple Moving Average": 1, "_id": 0}
+    myDoc = {"Ticker": list}
+    result = read_documentProjection(myDoc, projection)
+    return json.loads(json.dumps(result, indent=4, default=json_util.default))
+```
+ 
+Which I have altered to include a projection variable based on the data above and now looks like this:
+
+```
+# stockReport/list
+@route('/stockReport/<list>', method='GET')
+def stockReport(list):
+    projection = {"Ticker" : 1, "Sector" : 1, "Industry" : 1, "Performance (YTD)" : 1, "Price" : 1, "50-Day Simple Moving Average": 1, "Shares Float": 1, "_id": 0}
+    myDoc = {"Ticker": list}
+    result = read_documentProjection(myDoc, projection)
+    return json.loads(json.dumps(result, indent=4, default=json_util.default))
+```
+
+Overall, we can see this is much more information but professionally displayed and the results will be uniform no matter how many different stock reports the user pulls they will be used to seeing the same data variables throughout the entirety of this application. These changes highlight two important course objectives. First, the uniformaty that I am aiming to bring to this project with these changes provides broader usability for a multitude of different users. It makes the system more accessaple to a diverse audience in order to support organizational decision making. Secondly, it brings a professional quality to the function that we created for academic purposes but could really be used beyond that now that we have added some polish and complexity to the situation. With both of these goals complete, this portfolio is on track with the original plan to meet all course objectives.
+
+## Enhancement Three - Software Engineering
 
 ### Markdown
 
