@@ -7,15 +7,40 @@ Additionally, I have completed a series of enhancements above and beyond what wa
 ## Code Review
 
 Here is a link to my video code review where I go through these projects, in the video I identify the need to make the following enhancements:
+
 - Algorithms and Data Structures: expand upon the stock report returned, making it more complex and more professional in appearance
+
 - Databases: Make the database more secure by adding a username/password requirement to access the DB
+
 - Software Engineering: Convert the project from Python into Java which will relay a variety of software development skills
 
 ## Enhancement One - Databases
 Here we will make the first enhancement which involves adding the username and password to the database.
 First, here is the original code setting up the databse connection:
 ```
-put code here
+connection = MongoClient('localhost', 27017)
+db = connection['market']
+collection = db['stocks']
+```
+This enhancement occured in two primary steps, excluding the backend changes to the database itself, which are not highlighted in this portfolio. First, we need to capture a username and password from the user. Secondly, we need to pass this info during the database connection setup. These two steps are shown in the code snippets below:
+
+```def main():
+  
+    useName = input("Username:")
+    passW = input("Password:")
+    authenticate_user(useName,passW)
+```
+
+```
+# setup database connection with user authentication details
+def authenticate_user(name,pw):
+    try:
+        connection = MongoClient('localhost', 27017, username=useName, password=passW)
+        db = connection['market']
+        collection = db['stocks']
+    except:
+        return False
+    return True
 ```
 
 ### Markdown
