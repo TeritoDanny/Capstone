@@ -4,6 +4,20 @@ Here is a list of works showing my most exemplary software engineering examples 
 
 Additionally, I have completed a series of enhancements above and beyond what was required for the original course, in order to showcase my abilities further in several key areas.
 
+## Code Review
+
+Here is a link to my video code review where I go through these projects, in the video I identify the need to make the following enhancements:
+- Algorithms and Data Structures: expand upon the stock report returned, making it more complex and more professional in appearance
+- Databases: Make the database more secure by adding a username/password requirement to access the DB
+- Software Engineering: Convert the project from Python into Java which will relay a variety of software development skills
+
+## Enhancement One - Databases
+Here we will make the first enhancement which involves adding the username and password to the database.
+First, here is the original code setting up the databse connection:
+```
+put code here
+```
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
