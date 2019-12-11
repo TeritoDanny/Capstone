@@ -114,6 +114,80 @@ Overall, we can see this is much more information but professionally displayed a
 
 ## Enhancement Three - Software Engineering
 
+The third and final enhancement was to convert the client application from Python into Java while maintaning the same usability it had before when interfacing with the PyMongo server side application that runs in tandem with this file. This enhancement can't really be summarized in a small clip of code from before or after as the entire file had to be re-written from scratch. However, I think just how big of a difference it makes can be seen in the initial file setup through the first function, so I will highlight both of those portions here.
+Python Version:
+```
+#!/usr/bin/python
+import json
+from bson import json_util
+import bottle
+from bottle import Bottle, route, run, request, abort
+import pymongo
+from pymongo import MongoClient
+import datetime
+import pprint
+
+connection = MongoClient('localhost', 27017)
+db = connection['market']
+collection = db['stocks']
+
+# *** CRUD imported operations
+def insert_document(document):
+    try:
+        result=collection.save(document)
+    except:
+        return False
+    return True
+```
+Java Version
+```
+package com.snhu.app;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.Cursor;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.ParallelScanOptions;
+import com.mongodb.ServerAddress;
+import java.util.List;
+import java.util.Set;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.ClassNotFoundException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+public class App {
+  
+  /* C from CRUD functions for creating a document */
+  public static void create_document(BasicDBObject doc) {
+    try {
+      MongoClient mg = new MongoClient("localhost");
+      DB db = mongoClient.getDB("market");
+      DBCollection coll = db.getCollection("stocks");
+      coll.insert(doc);
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+```
+As you can see, a great many changes in the nuances of the code are required even though the function from each program simply adds a record to the collection. This final enhancement has affected multiple files. In my github directory, [App.java](https://github.com/Danny11068/Capstone/blob/master/App.java) is the client-side application that runs this, it works with the [pom.xml](https://github.com/Danny11068/Capstone/blob/master/pom.xml) file to point it to the correct places for some of the imports. Once running, it is meant to interface with the [server side script](https://github.com/Danny11068/Capstone/blob/master/CS499FinalRESTDannyRandolphEnhancementTwo.py) in order to actually perform CRUD functions on the Mongo DB I have setup.
+
+## Professional Self-Assessment
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
