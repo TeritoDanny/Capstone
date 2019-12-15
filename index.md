@@ -17,7 +17,7 @@ In conclusion, I have developed a well-rounded skillset during my time in the co
 
 ## Code Review
 
-Here is a link to my video code review where I go through these projects, in the video I identify the need to make the following enhancements:
+Here is a link to my video code review where I go through these projects, in the video I identify the need to make the following enhancements: [YouTube Link](https://youtu.be/pyekWaV2ADs)
 
 - Algorithms and Data Structures: expand upon the stock report returned, making it more complex and more professional in appearance
 
